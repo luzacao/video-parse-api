@@ -320,6 +320,7 @@ def git_publish(paths: list[Path], message: str) -> None:
     if not token:
         raise SystemExit("缺少 GITHUB_TOKEN，无法 push")
     url = f"https://x-access-token:{token}@github.com/{repo}.git"
+    run(["git", "-C", str(ROOT), "pull", "--rebase", url, "main"])
     run(["git", "-C", str(ROOT), "push", url, "HEAD:main"])
 
 
