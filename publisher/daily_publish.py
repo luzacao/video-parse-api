@@ -320,8 +320,15 @@ def git_publish(paths: list[Path], message: str) -> None:
     if not token:
         raise SystemExit("缺少 GITHUB_TOKEN，无法 push")
     url = f"https://x-access-token:{token}@github.com/{repo}.git"
-    run(["git", "-C", str(ROOT), "pull", "--rebase", url, "main"])
-    run(["git", "-C", str(ROOT), "push", url, "HEAD:main"])
+    author_name = getenv("GIT_USER_NAME", "daily-publisher")
+    author_email = getenv("GIT_USER_EMAIL", "daily-publisher@users.noreply.github.com")
+    git_env = os.environ.copy()
+    git_env["GIT_AUTHOR_NAME"] = author_name
+    git_env["GIT_AUTHOR_EMAIL"] = author_email
+    git_env["GIT_COMMITTER_NAME"] = author_name
+    git_env["GIT_COMMITTER_EMAIL"] = author_email
+    run(["git", "-C", str(ROOT), "pull", "--rebase", url, "main"], env=git_env)
+    run(["git", "-C", str(ROOT), "push", url, "HEAD:main"], env=git_env)
 
 
 def main() -> int:
