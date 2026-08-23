@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import base64
 import datetime as dt
 import json
 import os
@@ -405,6 +406,26 @@ def ensure_daily_repo(token: str, owner: str, name: str, description: str) -> di
     return info
 
 
+def upsert_readme(token: str, owner: str, name: str, readme: str) -> None:
+    """用 Contents API 写 README，避免服务器 git+HTTP/2 推送失败。"""
+    encoded = base64.b64encode(readme.rstrip().encode("utf-8") + b"\n").decode("ascii")
+    path = f"/repos/{owner}/{name}/contents/README.md"
+    payload: dict = {
+        "message": "docs: 发布去水印 API 说明",
+        "content": encoded,
+        "branch": "main",
+    }
+    try:
+        current = github_api("GET", path, token)
+        sha = current.get("sha")
+        if sha:
+            payload["sha"] = sha
+    except RuntimeError as exc:
+        if "-> 404:" not in str(exc):
+            raise
+    github_api("PUT", path, token, payload)
+
+
 def git_identity_env() -> dict:
     env = os.environ.copy()
     name = getenv("GIT_USER_NAME", "daily-publisher")
@@ -413,6 +434,7 @@ def git_identity_env() -> dict:
     env["GIT_AUTHOR_EMAIL"] = email
     env["GIT_COMMITTER_NAME"] = name
     env["GIT_COMMITTER_EMAIL"] = email
+    env["GIT_HTTP_VERSION"] = "HTTP/1.1"
     return env
 
 
@@ -476,7 +498,7 @@ def git_publish_hub(paths: list[Path], message: str) -> None:
         raise SystemExit("缺少 GITHUB_TOKEN，无法 push")
     url = f"https://x-access-token:{token}@github.com/{repo}.git"
     git_env = git_identity_env()
-    run(["git", "-C", str(ROOT), "pull", "--rebase", url, "main"], env=git_env)
+    run(["git", "-C", str(ROOT), "pull", "--rebase", "--autostash", url, "main"], env=git_env)
     run(["git", "-C", str(ROOT), "push", url, "HEAD:main"], env=git_env)
 
 
@@ -498,7 +520,7 @@ def main() -> int:
     body = call_deepseek(build_prompt(day, topic, style, api_readme), temperature=0.95)
     body = ensure_promo(body)
     info = ensure_daily_repo(token, owner, name, repo_description(day, topic))
-    push_new_repo(token, owner, name, body)
+    upsert_readme(token, owner, name, body)
     html_url = info.get("html_url") or f"https://github.com/{owner}/{name}"
     article = write_article(day, body + f"\n\n---\n本日独立仓库：{html_url}\n")
     rewrite_index(
