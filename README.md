@@ -1,21 +1,39 @@
 # 短视频去水印 API
 
-把抖音、快手、豆包等平台的**分享链接**交给接口，返回无水印视频 / 图集直链、封面、作者信息。
+把抖音、快手、豆包（豆包）等平台的**分享链接**交给接口，返回无水印视频 / 图集 / 封面地址。
 
-在线文档（站内）：[https://video.zacao.top/docs](https://video.zacao.top/docs)  
+在线文档：[https://video.zacao.top/docs](https://video.zacao.top/docs)  
 购买 Key：[https://video.zacao.top/buy](https://video.zacao.top/buy)
-
-> 仅用于你有权处理的素材（自己作品、已获授权内容）。请遵守各平台服务条款与当地法律。
 
 ---
 
-## Base URL
+## 能解析什么
+
+粘贴 App 里「复制链接」得到的口令或 URL 即可，不必先拆出真实地址。
+
+| 平台 | 说明 |
+| --- | --- |
+| **抖音** | 短链 `v.douyin.com`、图集、实况 |
+| **快手** | `v.kuaishou.com` 等分享链 |
+| **豆包 / 豆包** | `doubao.com`、`dola.com` 分享的生成视频 |
+| 即梦 | `jimeng.jianying.com` |
+| 小红书 | 图文 / 视频笔记 |
+| 视频号 / 公众号 | 微信侧分享链 |
+| B 站、头条、西瓜、微博、微视、得物、TikTok 等 | 共 30+ 平台 |
+
+链接识别按域名自动分流，调用方不用传 `platform`。
+
+---
+
+## 接入说明
+
+**Base URL**
 
 ```text
 https://video.zacao.top
 ```
 
-统一响应：
+**统一响应**
 
 ```json
 {
@@ -26,11 +44,13 @@ https://video.zacao.top
 }
 ```
 
-首页网页体验可不带 Key，每个 IP 每小时限 30 次。正式对接请使用 API Key。
+首页网页体验可以不带 Key，每个 IP 每小时限 30 次。正式对接请使用 API Key。
 
 ---
 
 ## 鉴权
+
+在 [购买页](https://video.zacao.top/buy) 自助下单，或由服务方发放。请求时任选一种：
 
 | 方式 | 写法 |
 | --- | --- |
@@ -38,31 +58,17 @@ https://video.zacao.top
 | Bearer | `Authorization: Bearer mp_xxxx` |
 | Body / Query | `api_key=mp_xxxx` |
 
-Key 无效或已禁用返回 `403`。服务端开启强制鉴权时，缺 Key 返回 `401`。
+无效或已禁用的 Key 返回 `403`。服务端开启强制鉴权后，无 Key 返回 `401`。
 
 ---
 
-## 支持平台
+## 解析接口
 
-重点覆盖：**抖音、快手、豆包**，并支持小红书、视频号、B 站、今日头条、TikTok、即梦、公众号、微博、西瓜、知乎、微视、梨视频、得物等 **30+** 平台。
-
-常见链接形态：
-
-| 平台 | 示例 |
-| --- | --- |
-| 抖音 | `https://v.douyin.com/xxxxx/`、`https://www.douyin.com/video/...` |
-| 快手 | `https://v.kuaishou.com/xxxxx`、`https://www.kuaishou.com/short-video/...` |
-| 豆包 | `https://www.doubao.com/...`、`https://www.dola.com/...` |
-
-`text` 可以直接贴 App 里「复制链接」的整段分享文案，接口会自动抽出 URL。
-
----
-
-## POST `/api/parse`
+### `POST /api/parse`
 
 解析短视频 / 图文，返回无水印地址。
 
-### 请求
+**请求**
 
 ```http
 POST /api/parse
@@ -72,49 +78,46 @@ X-API-Key: mp_xxxx
 {"text": "https://v.douyin.com/xxxxx/"}
 ```
 
-| 参数 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| `text` | string | 是 | 分享文案或完整链接，也可用 `url` |
+`text` 也可以换成 `url`。可以直接丢整段分享口令，接口会从文案里抽出链接。
 
-### 成功 `data`
+**`data` 字段**
 
 | 字段 | 说明 |
 | --- | --- |
-| `platform` | 平台名，如 `抖音` / `快手` / `豆包` |
+| `platform` | 平台名，如 `抖音`、`快手`、`豆包` |
 | `title` | 标题 |
-| `video_id` | 平台侧作品 ID（如有） |
-| `video_url` | 可播放地址（部分平台为站内流代理路径） |
+| `video_url` | 可播放地址（部分平台为站内代理路径） |
 | `source_video_url` | 原始视频地址 |
 | `cover_url` | 封面 |
 | `audio_url` | 音频（如有） |
-| `image_list` | 图集；元素为 URL 字符串，或 `{url, live_photo_url}` |
-| `author` | 作者信息对象 |
+| `image_list` | 图集；元素为字符串，或 `{ "url", "live_photo_url" }` |
+| `author` | 作者信息 |
+| `video_id` | 平台侧作品 ID（如有） |
 
-### curl
+**curl**
 
 ```bash
 curl -X POST 'https://video.zacao.top/api/parse' \
   -H 'Content-Type: application/json' \
   -H 'X-API-Key: mp_xxxx' \
-  -d '{"text":"https://v.douyin.com/xxxxx/"}'
+  -d '{"text":"9.01 复制打开抖音，看看https://v.douyin.com/xxxxx/"}'
 ```
 
-### Python
+**Python**
 
 ```python
 import requests
 
-resp = requests.post(
+r = requests.post(
     "https://video.zacao.top/api/parse",
     headers={"X-API-Key": "mp_xxxx"},
-    json={"text": "https://v.douyin.com/xxxxx/"},
+    json={"text": "https://v.kuaishou.com/xxxxx"},
     timeout=30,
 )
-data = resp.json()
-print(data["data"]["platform"], data["data"]["video_url"])
+print(r.json())
 ```
 
-### 成功示例
+**成功示例（抖音）**
 
 ```json
 {
@@ -122,16 +125,16 @@ print(data["data"]["platform"], data["data"]["video_url"])
   "message": "成功",
   "succ": true,
   "data": {
+    "video_id": "7123...",
     "platform": "抖音",
     "title": "视频标题",
-    "video_id": "7123...",
     "video_url": "https://...",
     "source_video_url": "https://...",
-    "cover_url": "https://...",
     "audio_url": "https://...",
+    "cover_url": "https://...",
     "author": {
-      "nickname": "作者昵称",
-      "author_id": "作者ID",
+      "nickname": "作者",
+      "author_id": "...",
       "avatar": "https://..."
     },
     "image_list": []
@@ -141,25 +144,33 @@ print(data["data"]["platform"], data["data"]["video_url"])
 
 ---
 
-## GET/POST `/api/parse/v2`
+### `GET|POST /api/parse/v2`
 
-与 `/api/parse` 同一套解析逻辑，额外带兼容字段。
+解析逻辑与 `/api/parse` 相同，额外带一批兼容字段，方便旧客户端对接。
 
 | 入参 | 说明 |
 | --- | --- |
-| POST body `text` | 分享文案 / 链接 |
-| GET query `url` | 链接地址 |
+| POST body `text` / `url` | 分享文案或链接 |
+| GET query `url` / `text` | 同上 |
 
-额外字段：`url`、`sourceURL`、`streamUrl`、`imgUrls`、`sourceImgUrls`、`type`（`1`=视频，`0`=图文）。
+额外字段：
+
+| 字段 | 说明 |
+| --- | --- |
+| `url` | 同 `video_url` |
+| `sourceURL` | 同 `source_video_url` |
+| `streamUrl` | 走了站内代理时的播放地址，否则为空 |
+| `imgUrls` / `sourceImgUrls` | 图集 URL 列表 |
+| `type` | `1` = 视频，`0` = 图文 |
 
 ```bash
-curl 'https://video.zacao.top/api/parse/v2?url=https://v.douyin.com/xxxxx/' \
+curl 'https://video.zacao.top/api/parse/v2?url=https://www.doubao.com/thread/xxxxx' \
   -H 'X-API-Key: mp_xxxx'
 ```
 
 ---
 
-## GET/POST `/api/detail`
+### `GET|POST /api/detail`
 
 作品详情：标题、发布时间、作者、点赞 / 评论 / 收藏 / 分享 / 播放量。  
 目前支持 **抖音、小红书、视频号**。不返回视频或图片直链。
@@ -175,8 +186,7 @@ curl -X POST 'https://video.zacao.top/api/detail' \
 | --- | --- |
 | `platform` | 抖音 / 小红书 / 视频号 |
 | `work_id` | 作品 ID |
-| `title` | 标题 |
-| `desc` | 正文 / 描述 |
+| `title` / `desc` | 标题、正文 |
 | `type` | `video` / `image` / `note` |
 | `publish_time` | Unix 秒 |
 | `publish_time_str` | 北京时间 `YYYY-MM-DD HH:MM:SS` |
@@ -184,18 +194,18 @@ curl -X POST 'https://video.zacao.top/api/detail' \
 | `stats.like_count` | 点赞 |
 | `stats.comment_count` | 评论 |
 | `stats.collect_count` | 收藏 |
-| `stats.share_count` | 分享 |
+| `stats.share_count` | 分享 / 转发 |
 | `stats.play_count` | 播放 / 阅读（有则返回） |
 | `cover_url` | 封面 |
 
 ---
 
-## GET `/api/video/stream`
+### `GET /api/video/stream`
 
-部分平台直链有防盗链，`/api/parse` 可能已经返回站内代理地址。也可自行走流代理：
+部分平台直链有防盗链，`/api/parse` 可能已经把 `video_url` 换成站内代理路径。也可以自己调：
 
 ```text
-GET /api/video/stream?url=<encoded_video_url>&referer=<encoded_page_url>
+GET /api/video/stream?url=<urlencoded>&referer=<urlencoded>
 ```
 
 | 参数 | 说明 |
@@ -220,15 +230,14 @@ GET /api/video/stream?url=<encoded_video_url>&referer=<encoded_page_url>
 探活：
 
 ```bash
-curl 'https://video.zacao.top/api/health'
+curl https://video.zacao.top/api/health
 ```
-
-返回：`{"code":200,"message":"ok","succ":true}`
 
 ---
 
-## 说明
+## 使用注意
 
-- 解析结果里的直链可能有时效，建议拿到后尽快转存，不要长期缓存当 CDN 用。
-- 豆包 / 部分平台的 `video_url` 可能是 `/api/video/stream?...` 代理路径，请拼上 Base URL 再播放。
-- 本仓库只放对接文档，不含解析服务源码。
+1. 直链有时效，解析成功后请尽快转存，不要把 `source_video_url` 当永久地址缓存。
+2. 豆包 / 即梦等生成内容，请使用 App 或网页里的**分享链接**，不要传对话页的内部 URL。
+3. 快手、小红书短链有时需要完整口令；解析失败时让用户重新复制一次分享文案。
+4. 仅用于已获授权的素材提取、备份与学习。请遵守各平台用户协议与著作权法，不要把本接口用于侵权搬运。
