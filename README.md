@@ -2,7 +2,16 @@
 
 把抖音、快手、豆包（豆包）等平台的**分享链接**交给接口，返回无水印视频 / 图集 / 封面地址。
 
-在线文档：[https://video.zacao.top/docs](https://video.zacao.top/docs)  
+## 在线体验
+
+| | |
+| --- | --- |
+| 体验地址 | [https://video.zacao.top](https://video.zacao.top) |
+| 访问密码 | `zacao` |
+
+打开网址后输入密码进入首页，粘贴分享链接即可试解析。每个 IP 每小时限 30 次。
+
+完整接口文档：[https://video.zacao.top/docs](https://video.zacao.top/docs)  
 购买 Key：[https://video.zacao.top/buy](https://video.zacao.top/buy)
 
 ---
