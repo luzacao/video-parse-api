@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""每天生成一篇去水印 API 宣传向 Markdown，并推送到 GitHub。"""
+"""每天生成一篇去水印 API 宣传文，并新建一个 GitHub 公开仓库发布。"""
 
 from __future__ import annotations
 
@@ -7,8 +7,10 @@ import datetime as dt
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -44,6 +46,29 @@ TOPICS = [
     "给运营 / 非研发看的 3 分钟上手指南",
     "和「网页复制保存」比，接口批量的优势",
     "直链过期、防盗链、代理播放那些坑",
+]
+
+# 仓库名每天换关键词组合，便于 GitHub 搜索收录
+REPO_NAME_PATTERNS = [
+    "douyin-kuaishou-qushuiyin-api-{date}",
+    "doubao-watermark-free-parse-{date}",
+    "xiaohongshu-kuaishou-parse-api-{date}",
+    "short-video-no-watermark-api-{date}",
+    "wechat-channels-qushuiyin-{date}",
+    "jimeng-doubao-video-parse-{date}",
+    "tiktok-douyin-watermark-api-{date}",
+    "video-parse-api-qushuiyin-{date}",
+]
+
+REPO_TOPICS = [
+    "watermark",
+    "douyin",
+    "kuaishou",
+    "tiktok",
+    "api",
+    "video",
+    "parser",
+    "doubao",
 ]
 
 # 每天换一种写法，避免读者一看就是同一模板
@@ -151,10 +176,11 @@ def call_deepseek(prompt: str, temperature: float) -> str:
             {
                 "role": "system",
                 "content": (
-                    "你在给「短视频去水印 API」写每日宣传文档，读者是要接接口或先试用的人。\n"
+                    "你在给「短视频去水印 API」写 GitHub 仓库首页 README，读者来自 GitHub 搜索。\n"
                     "只输出完整 Markdown 正文，不要包 ```markdown。\n"
                     "不要编造 README 里没有的接口路径。\n"
-                    "这是投放内容：自然、好读、每天换说法，但硬广信息一条都不能少。"
+                    "这是投放内容：自然、好读、每天换说法，但硬广信息一条都不能少。\n"
+                    "标题里尽量带上「去水印」「抖音」或「快手」等检索词，但不要堆砌。"
                 ),
             },
             {"role": "user", "content": prompt},
@@ -271,14 +297,31 @@ def write_article(day: dt.date, body: str) -> Path:
     return path
 
 
-def rewrite_index() -> None:
+def rewrite_index(entries: list[dict]) -> None:
     files = sorted(p for p in ARTICLES_DIR.glob("*.md") if p.name != "README.md")
     lines = [
         "# 每日文档",
         "",
-        f"每天 06:00（北京时间）自动发布。试用：[video.zacao.top]({SITE}) ，密码 `{PASSWORD}`。",
+        f"每天 06:00（北京时间）自动**新建一个公开仓库**发布。试用：[video.zacao.top]({SITE}) ，密码 `{PASSWORD}`。",
+        "",
+        "## 每日仓库",
         "",
     ]
+    catalog = ARTICLES_DIR / "repos.json"
+    history: list[dict] = []
+    if catalog.is_file():
+        try:
+            history = json.loads(catalog.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            history = []
+    by_date = {item.get("date"): item for item in history if item.get("date")}
+    for item in entries:
+        by_date[item["date"]] = item
+    history = [by_date[k] for k in sorted(by_date, reverse=True)]
+    catalog.write_text(json.dumps(history, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for item in history:
+        lines.append(f"- [{item['date']}]({item['url']}) `{item['repo']}`")
+    lines.extend(["", "## 文稿备份", ""])
     for p in reversed(files):
         title = p.stem
         for line in p.read_text(encoding="utf-8").splitlines():
@@ -290,7 +333,119 @@ def rewrite_index() -> None:
     (ARTICLES_DIR / "README.md").write_text("\n".join(lines), encoding="utf-8")
 
 
-def git_publish(paths: list[Path], message: str) -> None:
+def github_api(method: str, path: str, token: str, payload: dict | None = None) -> dict:
+    data = None if payload is None else json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        f"https://api.github.com{path}",
+        data=data,
+        method=method,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "User-Agent": "video-parse-daily-publisher",
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            raw = resp.read().decode("utf-8")
+            return json.loads(raw) if raw else {}
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:1500]
+        raise RuntimeError(f"GitHub {method} {path} -> {exc.code}: {detail}") from exc
+
+
+def repo_name_for(day: dt.date) -> str:
+    stamp = day.strftime("%Y%m%d")
+    pattern = pick(REPO_NAME_PATTERNS, day, 5)
+    return pattern.format(date=stamp)
+
+
+def repo_description(day: dt.date, topic: str) -> str:
+    return (
+        f"{day.isoformat()} 短视频去水印 API · 抖音/快手/豆包/小红书解析 · "
+        f"{topic} · {SITE}"
+    )[:350]
+
+
+def ensure_daily_repo(token: str, owner: str, name: str, description: str) -> dict:
+    try:
+        info = github_api("GET", f"/repos/{owner}/{name}", token)
+        print(f"今日仓库已存在，更新 README：{info.get('html_url')}")
+        return info
+    except RuntimeError as exc:
+        if "-> 404:" not in str(exc):
+            raise
+    info = github_api(
+        "POST",
+        "/user/repos",
+        token,
+        {
+            "name": name,
+            "description": description,
+            "homepage": SITE,
+            "private": False,
+            "has_issues": False,
+            "has_projects": False,
+            "has_wiki": False,
+            "auto_init": False,
+        },
+    )
+    try:
+        github_api(
+            "PUT",
+            f"/repos/{owner}/{name}/topics",
+            token,
+            {"names": REPO_TOPICS},
+        )
+    except RuntimeError as exc:
+        print(f"设置 topics 失败（可忽略）：{exc}")
+    print(f"已新建仓库：{info.get('html_url')}")
+    return info
+
+
+def git_identity_env() -> dict:
+    env = os.environ.copy()
+    name = getenv("GIT_USER_NAME", "daily-publisher")
+    email = getenv("GIT_USER_EMAIL", "daily-publisher@users.noreply.github.com")
+    env["GIT_AUTHOR_NAME"] = name
+    env["GIT_AUTHOR_EMAIL"] = email
+    env["GIT_COMMITTER_NAME"] = name
+    env["GIT_COMMITTER_EMAIL"] = email
+    return env
+
+
+def push_new_repo(token: str, owner: str, name: str, readme: str) -> None:
+    git_env = git_identity_env()
+    url = f"https://x-access-token:{token}@github.com/{owner}/{name}.git"
+    tmp = Path(tempfile.mkdtemp(prefix="daily-repo-"))
+    try:
+        (tmp / "README.md").write_text(readme.rstrip() + "\n", encoding="utf-8")
+        run(["git", "init", "-b", "main"], cwd=tmp, env=git_env, capture_output=True)
+        run(["git", "add", "README.md"], cwd=tmp, env=git_env)
+        run(
+            [
+                "git",
+                "-c",
+                f"user.name={git_env['GIT_AUTHOR_NAME']}",
+                "-c",
+                f"user.email={git_env['GIT_AUTHOR_EMAIL']}",
+                "commit",
+                "-m",
+                "docs: 发布去水印 API 说明",
+            ],
+            cwd=tmp,
+            env=git_env,
+            capture_output=True,
+        )
+        run(["git", "remote", "add", "origin", url], cwd=tmp, env=git_env)
+        run(["git", "push", "-u", "origin", "HEAD:main", "--force"], cwd=tmp, env=git_env)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+def git_publish_hub(paths: list[Path], message: str) -> None:
     token = getenv("GITHUB_TOKEN")
     repo = getenv("GITHUB_REPO", "luzacao/video-parse-api")
     run(["git", "-C", str(ROOT), "add", "--"] + [str(p) for p in paths])
@@ -301,7 +456,7 @@ def git_publish(paths: list[Path], message: str) -> None:
         text=True,
     )
     if not status.stdout.strip():
-        print("无文件变更，跳过提交")
+        print("主仓库无文件变更，跳过提交")
         return
     run(
         [
@@ -311,7 +466,7 @@ def git_publish(paths: list[Path], message: str) -> None:
             "-c",
             "user.name=" + getenv("GIT_USER_NAME", "daily-publisher"),
             "-c",
-            "user.email=" + getenv("GIT_USER_EMAIL", "daily-publisher@local"),
+            "user.email=" + getenv("GIT_USER_EMAIL", "daily-publisher@users.noreply.github.com"),
             "commit",
             "-m",
             message,
@@ -320,13 +475,7 @@ def git_publish(paths: list[Path], message: str) -> None:
     if not token:
         raise SystemExit("缺少 GITHUB_TOKEN，无法 push")
     url = f"https://x-access-token:{token}@github.com/{repo}.git"
-    author_name = getenv("GIT_USER_NAME", "daily-publisher")
-    author_email = getenv("GIT_USER_EMAIL", "daily-publisher@users.noreply.github.com")
-    git_env = os.environ.copy()
-    git_env["GIT_AUTHOR_NAME"] = author_name
-    git_env["GIT_AUTHOR_EMAIL"] = author_email
-    git_env["GIT_COMMITTER_NAME"] = author_name
-    git_env["GIT_COMMITTER_EMAIL"] = author_email
+    git_env = git_identity_env()
     run(["git", "-C", str(ROOT), "pull", "--rebase", url, "main"], env=git_env)
     run(["git", "-C", str(ROOT), "push", url, "HEAD:main"], env=git_env)
 
@@ -334,21 +483,32 @@ def git_publish(paths: list[Path], message: str) -> None:
 def main() -> int:
     load_dotenv(Path(__file__).resolve().parent / ".env")
     load_dotenv(ROOT / ".env")
+    token = getenv("GITHUB_TOKEN")
+    owner = getenv("GITHUB_OWNER", "luzacao")
+    if not token:
+        raise SystemExit("缺少 GITHUB_TOKEN")
     day = today()
     topic = pick(TOPICS, day, 0)
     style = pick(FORMATS, day, 3)
+    name = repo_name_for(day)
     api_readme = README_PATH.read_text(encoding="utf-8") if README_PATH.is_file() else ""
     print(f"生成 {day.isoformat()} 主题：{topic}", flush=True)
     print(f"今日版式：{style['name']}", flush=True)
+    print(f"今日仓库：{owner}/{name}", flush=True)
     body = call_deepseek(build_prompt(day, topic, style, api_readme), temperature=0.95)
     body = ensure_promo(body)
-    article = write_article(day, body)
-    rewrite_index()
-    git_publish(
-        [article, ARTICLES_DIR / "README.md"],
-        f"docs: 发布 {day.isoformat()} 去水印 API 日报",
+    info = ensure_daily_repo(token, owner, name, repo_description(day, topic))
+    push_new_repo(token, owner, name, body)
+    html_url = info.get("html_url") or f"https://github.com/{owner}/{name}"
+    article = write_article(day, body + f"\n\n---\n本日独立仓库：{html_url}\n")
+    rewrite_index(
+        [{"date": day.isoformat(), "repo": f"{owner}/{name}", "url": html_url}]
     )
-    print(f"已发布 {article.relative_to(ROOT)}")
+    git_publish_hub(
+        [article, ARTICLES_DIR / "README.md", ARTICLES_DIR / "repos.json"],
+        f"docs: 发布 {day.isoformat()} 仓库 {owner}/{name}",
+    )
+    print(f"已发布 {html_url}")
     return 0
 
 
