@@ -4,10 +4,12 @@
 
 ## 每日仓库
 
+- [2026-08-25](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260825) `luzacao/xiaohongshu-kuaishou-parse-api-20260825`
 - [2026-08-24](https://github.com/luzacao/doubao-watermark-free-parse-20260824) `luzacao/doubao-watermark-free-parse-20260824`
 - [2026-08-23](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20260823) `luzacao/douyin-kuaishou-qushuiyin-api-20260823`
 
 ## 文稿备份
 
+- [2026-08-25 · 2026-08-25](2026-08-25.md)
 - [2026-08-24 · 入口信息一览](2026-08-24.md)
 - [2026-08-23 · 抖音/快手去水印 API：从口令解析到稳定直链，用代码 5 分钟跑通](2026-08-23.md)
