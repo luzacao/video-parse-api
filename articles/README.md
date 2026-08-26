@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-08-27](https://github.com/luzacao/wechat-channels-qushuiyin-20260827) `luzacao/wechat-channels-qushuiyin-20260827`
 - [2026-08-26](https://github.com/luzacao/short-video-no-watermark-api-20260826) `luzacao/short-video-no-watermark-api-20260826`
 - [2026-08-25](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260825) `luzacao/xiaohongshu-kuaishou-parse-api-20260825`
 - [2026-08-24](https://github.com/luzacao/doubao-watermark-free-parse-20260824) `luzacao/doubao-watermark-free-parse-20260824`
@@ -11,6 +12,7 @@
 
 ## 文稿备份
 
+- [2026-08-27 · 短视频去水印 API 避坑清单：别再踩 Key、限流和错误码的坑](2026-08-27.md)
 - [2026-08-26 · 微信生态去水印，视频号和公众号到底能不能解？](2026-08-26.md)
 - [2026-08-25 · 2026-08-25](2026-08-25.md)
 - [2026-08-24 · 入口信息一览](2026-08-24.md)
