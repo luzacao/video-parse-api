@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-08-30](https://github.com/luzacao/video-parse-api-qushuiyin-20260830) `luzacao/video-parse-api-qushuiyin-20260830`
 - [2026-08-29](https://github.com/luzacao/tiktok-douyin-watermark-api-20260829) `luzacao/tiktok-douyin-watermark-api-20260829`
 - [2026-08-28](https://github.com/luzacao/jimeng-doubao-video-parse-20260828) `luzacao/jimeng-doubao-video-parse-20260828`
 - [2026-08-27](https://github.com/luzacao/wechat-channels-qushuiyin-20260827) `luzacao/wechat-channels-qushuiyin-20260827`
@@ -14,6 +15,7 @@
 
 ## 文稿备份
 
+- [2026-08-30 · 2026-08-30 更新说明：解析速度翻倍的秘密，不在网页复制，在 API 批量](2026-08-30.md)
 - [2026-08-29 · 运营和小编们，其实用不上“看文档”](2026-08-29.md)
 - [2026-08-28 · 短视频去水印 API 怎么选接口？parse / parse/v2 / detail / video/stream 一次讲清楚](2026-08-28.md)
 - [2026-08-27 · 短视频去水印 API 避坑清单：别再踩 Key、限流和错误码的坑](2026-08-27.md)
