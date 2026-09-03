@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-04](https://github.com/luzacao/wechat-channels-qushuiyin-20260904) `luzacao/wechat-channels-qushuiyin-20260904`
 - [2026-09-03](https://github.com/luzacao/short-video-no-watermark-api-20260903) `luzacao/short-video-no-watermark-api-20260903`
 - [2026-09-02](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260902) `luzacao/xiaohongshu-kuaishou-parse-api-20260902`
 - [2026-09-01](https://github.com/luzacao/doubao-watermark-free-parse-20260901) `luzacao/doubao-watermark-free-parse-20260901`
@@ -19,6 +20,7 @@
 
 ## 文稿备份
 
+- [2026-09-04 · 小红书图集别再踩坑了！image_list 与实况图解析避坑清单（2026-09-04）](2026-09-04.md)
 - [2026-09-03 · 三步操作：从分享链接到无水印视频](2026-09-03.md)
 - [2026-09-02 · 2026-09-02](2026-09-02.md)
 - [2026-09-01 · 这接口能处理什么？](2026-09-01.md)
