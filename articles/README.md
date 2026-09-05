@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-06](https://github.com/luzacao/tiktok-douyin-watermark-api-20260906) `luzacao/tiktok-douyin-watermark-api-20260906`
 - [2026-09-05](https://github.com/luzacao/jimeng-doubao-video-parse-20260905) `luzacao/jimeng-doubao-video-parse-20260905`
 - [2026-09-04](https://github.com/luzacao/wechat-channels-qushuiyin-20260904) `luzacao/wechat-channels-qushuiyin-20260904`
 - [2026-09-03](https://github.com/luzacao/short-video-no-watermark-api-20260903) `luzacao/short-video-no-watermark-api-20260903`
@@ -21,6 +22,7 @@
 
 ## 文稿备份
 
+- [2026-09-06 · 结果，他第一句问的是：“要不要钱？”](2026-09-06.md)
 - [2026-09-05 · 先说结论：微信生态能解什么、不能解什么](2026-09-05.md)
 - [2026-09-04 · 小红书图集别再踩坑了！image_list 与实况图解析避坑清单（2026-09-04）](2026-09-04.md)
 - [2026-09-03 · 三步操作：从分享链接到无水印视频](2026-09-03.md)
