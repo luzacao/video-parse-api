@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-08](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20260908) `luzacao/douyin-kuaishou-qushuiyin-api-20260908`
 - [2026-09-07](https://github.com/luzacao/video-parse-api-qushuiyin-20260907) `luzacao/video-parse-api-qushuiyin-20260907`
 - [2026-09-06](https://github.com/luzacao/tiktok-douyin-watermark-api-20260906) `luzacao/tiktok-douyin-watermark-api-20260906`
 - [2026-09-05](https://github.com/luzacao/jimeng-doubao-video-parse-20260905) `luzacao/jimeng-doubao-video-parse-20260905`
@@ -23,6 +24,7 @@
 
 ## 文稿备份
 
+- [2026-09-08 · 代码优先：先跑通，再理解](2026-09-08.md)
 - [2026-09-07 · 版本更新手记：视频解析的「瑞士军刀」新刀法（2026-09-07）](2026-09-07.md)
 - [2026-09-06 · 结果，他第一句问的是：“要不要钱？”](2026-09-06.md)
 - [2026-09-05 · 先说结论：微信生态能解什么、不能解什么](2026-09-05.md)
