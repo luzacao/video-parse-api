@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-12](https://github.com/luzacao/wechat-channels-qushuiyin-20260912) `luzacao/wechat-channels-qushuiyin-20260912`
 - [2026-09-11](https://github.com/luzacao/short-video-no-watermark-api-20260911) `luzacao/short-video-no-watermark-api-20260911`
 - [2026-09-10](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260910) `luzacao/xiaohongshu-kuaishou-parse-api-20260910`
 - [2026-09-09](https://github.com/luzacao/doubao-watermark-free-parse-20260909) `luzacao/doubao-watermark-free-parse-20260909`
@@ -27,6 +28,7 @@
 
 ## 文稿备份
 
+- [2026-09-12 · 快手口令解析总失败？别再踩这 7 个坑了（含去水印清单）](2026-09-12.md)
 - [2026-09-11 · 抖音分享链接怎么一键拿到无水印视频：三步上手，复制即用](2026-09-11.md)
 - [2026-09-10 · 2026-09-10](2026-09-10.md)
 - [2026-09-09 · 一、人工复制和接口批量，差在哪](2026-09-09.md)
