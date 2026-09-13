@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-14](https://github.com/luzacao/tiktok-douyin-watermark-api-20260914) `luzacao/tiktok-douyin-watermark-api-20260914`
 - [2026-09-13](https://github.com/luzacao/jimeng-doubao-video-parse-20260913) `luzacao/jimeng-doubao-video-parse-20260913`
 - [2026-09-12](https://github.com/luzacao/wechat-channels-qushuiyin-20260912) `luzacao/wechat-channels-qushuiyin-20260912`
 - [2026-09-11](https://github.com/luzacao/short-video-no-watermark-api-20260911) `luzacao/short-video-no-watermark-api-20260911`
@@ -29,6 +30,7 @@
 
 ## 文稿备份
 
+- [2026-09-14 · 小红书图文和实况图怎么去水印？聊聊 image_list 字段的用法](2026-09-14.md)
 - [2026-09-13 · 豆包、即梦 AI 视频怎么去水印？三条路子实测对比](2026-09-13.md)
 - [2026-09-12 · 快手口令解析总失败？别再踩这 7 个坑了（含去水印清单）](2026-09-12.md)
 - [2026-09-11 · 抖音分享链接怎么一键拿到无水印视频：三步上手，复制即用](2026-09-11.md)
