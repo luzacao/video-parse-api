@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-21](https://github.com/luzacao/jimeng-doubao-video-parse-20260921) `luzacao/jimeng-doubao-video-parse-20260921`
 - [2026-09-20](https://github.com/luzacao/wechat-channels-qushuiyin-20260920) `luzacao/wechat-channels-qushuiyin-20260920`
 - [2026-09-19](https://github.com/luzacao/short-video-no-watermark-api-20260919) `luzacao/short-video-no-watermark-api-20260919`
 - [2026-09-18](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260918) `luzacao/xiaohongshu-kuaishou-parse-api-20260918`
@@ -36,6 +37,7 @@
 
 ## 文稿备份
 
+- [2026-09-21 · 抖音分享链接怎么一键拿到无水印视频？我做了张三方对比表](2026-09-21.md)
 - [2026-09-20 · 别再踩直链过期和防盗链的坑：短视频去水印 API 避坑清单](2026-09-20.md)
 - [2026-09-19 · 抖音快手去水印 API：网页复制保存 vs 接口批量，差在哪](2026-09-19.md)
 - [2026-09-18 · 抖音快手去水印怎么接？运营 3 分钟上手 video.zacao.top](2026-09-18.md)
