@@ -1,9 +1,10 @@
 # 每日文档
 
-每天 06:00（北京时间）自动**新建一个公开仓库**发布。试用：[video.zacao.top](https://video.zacao.top) ，密码 `zacao`。
+每天 06:00（北京时间）自动新建一个公开仓库，并将最新文章同步到全部历史推广仓库。试用：[video.zacao.top](https://video.zacao.top)，无需访问密码。
 
 ## 每日仓库
 
+- [2026-09-27](https://github.com/luzacao/short-video-no-watermark-api-20260927) `luzacao/short-video-no-watermark-api-20260927`
 - [2026-09-26](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260926) `luzacao/xiaohongshu-kuaishou-parse-api-20260926`
 - [2026-09-25](https://github.com/luzacao/doubao-watermark-free-parse-20260925) `luzacao/doubao-watermark-free-parse-20260925`
 - [2026-09-24](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20260924) `luzacao/douyin-kuaishou-qushuiyin-api-20260924`
@@ -42,6 +43,7 @@
 
 ## 文稿备份
 
+- [2026-09-27 · 抖音快手去水印 API 四个接口怎么选：parse、parse/v2、detail、video/stream](2026-09-27.md)
 - [2026-09-26 · 2026-09-26](2026-09-26.md)
 - [2026-09-25 · 视频号、公众号链接丢进去会怎样？短视频去水印 API 的边界实测](2026-09-25.md)
 - [2026-09-24 · 小红书图集怎么去水印？用 image_list 把图文和实况图一次拿全](2026-09-24.md)
