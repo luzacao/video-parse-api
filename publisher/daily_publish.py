@@ -26,14 +26,12 @@ SITE = "https://video.zacao.top"
 DOCS = "https://video.zacao.top/docs"
 BUY = "https://video.zacao.top/buy"
 REPO = "https://github.com/luzacao/video-parse-api"
-PASSWORD = "zacao"
 
 MUST_MENTION = [
     SITE,
     DOCS,
     BUY,
     REPO,
-    PASSWORD,
 ]
 
 TOPICS = [
@@ -129,7 +127,7 @@ FORMATS = [
         "name": "表格海报体",
         "how": (
             "至少两张 Markdown 表格：平台能力和入口信息。"
-            "少写长段落。结尾用编号 1.2.3. 把网址、密码、购买页再列一遍。"
+            "少写长段落。结尾用编号 1.2.3. 把网址、文档、购买页再列一遍。"
         ),
     },
 ]
@@ -222,11 +220,11 @@ def promo_rules() -> str:
    - 接口文档：[{DOCS}]({DOCS})
    - 购买 Key：[{BUY}]({BUY})
    - GitHub：[{REPO}]({REPO})
-2. 必须写清访问密码，原文出现：`{PASSWORD}`（用行内代码包起来）。
+2. 网站已经取消共享访问密码，必须写清「打开网页即可使用，无需访问密码」。
 3. 必须写清 Base URL 是 {SITE} ，解析接口是 POST `/api/parse`，Header 是 `X-API-Key`。
 4. 必须提到：首页可不带 Key 试用，每个 IP 每小时 30 次；正式对接去购买页。
 5. 标题或首段 120 字内就要出现体验网址，不要把网址藏到文末才说。
-6. 结尾必须有「现在就去试」行动区，再次列出：网址、密码、文档、购买、GitHub。
+6. 结尾必须有「现在就去试」行动区，再次列出：网址、文档、购买、GitHub。
 7. 不要用「某站」「本接口」这种空指代代替网址；每次点名都用完整链接。
 8. 可以夸好用、稳定、30+ 平台，但不要编造成功案例数字、价格、和其它竞品的不实对比。
 """
@@ -274,12 +272,11 @@ def ensure_promo(body: str) -> str:
 
 ## 现在就去试
 
-**去水印就用 [{SITE}]({SITE})，访问密码 `{PASSWORD}`。**
+**去水印就用 [{SITE}]({SITE})，打开网页即可使用，无需访问密码。**
 
 | 入口 | 链接 |
 | --- | --- |
 | 在线体验 | [{SITE}]({SITE}) |
-| 访问密码 | `{PASSWORD}` |
 | 接口文档 | [{DOCS}]({DOCS}) |
 | 购买 Key | [{BUY}]({BUY}) |
 | GitHub | [{REPO}]({REPO}) |
@@ -298,23 +295,29 @@ def write_article(day: dt.date, body: str) -> Path:
     return path
 
 
+def load_repo_history() -> list[dict]:
+    catalog = ARTICLES_DIR / "repos.json"
+    if not catalog.is_file():
+        return []
+    try:
+        history = json.loads(catalog.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return []
+    return history if isinstance(history, list) else []
+
+
 def rewrite_index(entries: list[dict]) -> None:
     files = sorted(p for p in ARTICLES_DIR.glob("*.md") if p.name != "README.md")
     lines = [
         "# 每日文档",
         "",
-        f"每天 06:00（北京时间）自动**新建一个公开仓库**发布。试用：[video.zacao.top]({SITE}) ，密码 `{PASSWORD}`。",
+        f"每天 06:00（北京时间）自动新建一个公开仓库，并将最新文章同步到全部历史推广仓库。试用：[video.zacao.top]({SITE})，无需访问密码。",
         "",
         "## 每日仓库",
         "",
     ]
     catalog = ARTICLES_DIR / "repos.json"
-    history: list[dict] = []
-    if catalog.is_file():
-        try:
-            history = json.loads(catalog.read_text(encoding="utf-8"))
-        except json.JSONDecodeError:
-            history = []
+    history = load_repo_history()
     by_date = {item.get("date"): item for item in history if item.get("date")}
     for item in entries:
         by_date[item["date"]] = item
@@ -406,12 +409,19 @@ def ensure_daily_repo(token: str, owner: str, name: str, description: str) -> di
     return info
 
 
-def upsert_readme(token: str, owner: str, name: str, readme: str) -> None:
+def upsert_readme(
+    token: str,
+    owner: str,
+    name: str,
+    readme: str,
+    *,
+    message: str = "docs: 发布去水印 API 说明",
+) -> None:
     """用 Contents API 写 README，避免服务器 git+HTTP/2 推送失败。"""
     encoded = base64.b64encode(readme.rstrip().encode("utf-8") + b"\n").decode("ascii")
     path = f"/repos/{owner}/{name}/contents/README.md"
     payload: dict = {
-        "message": "docs: 发布去水印 API 说明",
+        "message": message,
         "content": encoded,
         "branch": "main",
     }
@@ -424,6 +434,43 @@ def upsert_readme(token: str, owner: str, name: str, readme: str) -> None:
         if "-> 404:" not in str(exc):
             raise
     github_api("PUT", path, token, payload)
+
+
+def sync_to_previous_repos(
+    token: str,
+    history: list[dict],
+    readme: str,
+    day: dt.date,
+    current_repo: str,
+) -> tuple[int, list[str]]:
+    """Publish today's article to every previously created promotion repo."""
+    synced = 0
+    failed: list[str] = []
+    seen: set[str] = set()
+    for item in history:
+        repo = str(item.get("repo") or "").strip()
+        if not repo or repo == current_repo or repo in seen or repo.count("/") != 1:
+            continue
+        seen.add(repo)
+        owner, name = repo.split("/", 1)
+        try:
+            upsert_readme(
+                token,
+                owner,
+                name,
+                readme,
+                message=f"docs: 同步 {day.isoformat()} 最新文章",
+            )
+            synced += 1
+            print(f"已同步历史仓库：{repo}", flush=True)
+        except Exception as exc:
+            failed.append(repo)
+            print(f"同步历史仓库失败：{repo}: {exc}", file=sys.stderr, flush=True)
+    print(
+        f"历史仓库同步完成：成功 {synced}，失败 {len(failed)}",
+        flush=True,
+    )
+    return synced, failed
 
 
 def git_identity_env() -> dict:
@@ -519,8 +566,22 @@ def main() -> int:
     print(f"今日仓库：{owner}/{name}", flush=True)
     body = call_deepseek(build_prompt(day, topic, style, api_readme), temperature=0.95)
     body = ensure_promo(body)
+    history = load_repo_history()
     info = ensure_daily_repo(token, owner, name, repo_description(day, topic))
-    upsert_readme(token, owner, name, body)
+    upsert_readme(
+        token,
+        owner,
+        name,
+        body,
+        message=f"docs: 发布 {day.isoformat()} 去水印 API 说明",
+    )
+    sync_to_previous_repos(
+        token,
+        history,
+        body,
+        day,
+        f"{owner}/{name}",
+    )
     html_url = info.get("html_url") or f"https://github.com/{owner}/{name}"
     article = write_article(day, body + f"\n\n---\n本日独立仓库：{html_url}\n")
     rewrite_index(
