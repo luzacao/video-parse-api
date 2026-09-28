@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-29](https://github.com/luzacao/jimeng-doubao-video-parse-20260929) `luzacao/jimeng-doubao-video-parse-20260929`
 - [2026-09-27](https://github.com/luzacao/short-video-no-watermark-api-20260927) `luzacao/short-video-no-watermark-api-20260927`
 - [2026-09-26](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260926) `luzacao/xiaohongshu-kuaishou-parse-api-20260926`
 - [2026-09-25](https://github.com/luzacao/doubao-watermark-free-parse-20260925) `luzacao/doubao-watermark-free-parse-20260925`
@@ -43,6 +44,7 @@
 
 ## 文稿备份
 
+- [2026-09-29 · 网页复制保存 vs 接口批量：抖音快手去水印谁更省事](2026-09-29.md)
 - [2026-09-27 · 抖音快手去水印 API 四个接口怎么选：parse、parse/v2、detail、video/stream](2026-09-27.md)
 - [2026-09-26 · 2026-09-26](2026-09-26.md)
 - [2026-09-25 · 视频号、公众号链接丢进去会怎样？短视频去水印 API 的边界实测](2026-09-25.md)
