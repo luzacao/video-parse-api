@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-09-30](https://github.com/luzacao/tiktok-douyin-watermark-api-20260930) `luzacao/tiktok-douyin-watermark-api-20260930`
 - [2026-09-29](https://github.com/luzacao/jimeng-doubao-video-parse-20260929) `luzacao/jimeng-doubao-video-parse-20260929`
 - [2026-09-27](https://github.com/luzacao/short-video-no-watermark-api-20260927) `luzacao/short-video-no-watermark-api-20260927`
 - [2026-09-26](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20260926) `luzacao/xiaohongshu-kuaishou-parse-api-20260926`
@@ -44,6 +45,7 @@
 
 ## 文稿备份
 
+- [2026-09-30 · 一个剪辑师的深夜救火：直链过期、防盗链和代理播放，抖音去水印 API 到底怎么绕](2026-09-30.md)
 - [2026-09-29 · 网页复制保存 vs 接口批量：抖音快手去水印谁更省事](2026-09-29.md)
 - [2026-09-27 · 抖音快手去水印 API 四个接口怎么选：parse、parse/v2、detail、video/stream](2026-09-27.md)
 - [2026-09-26 · 2026-09-26](2026-09-26.md)
