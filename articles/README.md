@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-10-04](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261004) `luzacao/xiaohongshu-kuaishou-parse-api-20261004`
 - [2026-10-03](https://github.com/luzacao/doubao-watermark-free-parse-20261003) `luzacao/doubao-watermark-free-parse-20261003`
 - [2026-10-02](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20261002) `luzacao/douyin-kuaishou-qushuiyin-api-20261002`
 - [2026-10-01](https://github.com/luzacao/video-parse-api-qushuiyin-20261001) `luzacao/video-parse-api-qushuiyin-20261001`
@@ -48,6 +49,7 @@
 
 ## 文稿备份
 
+- [2026-10-04 · 小红书图文 / 实况图怎么去水印？聊聊 image_list 的正确用法](2026-10-04.md)
 - [2026-10-03 · 豆包、即梦 AI 视频分享链去水印：一条链接换一个干净地址](2026-10-03.md)
 - [2026-10-02 · 快手口令解析失败？先跑通这段 Python 再说](2026-10-02.md)
 - [2026-10-01 · 抖音分享链接一键拿无水印视频：video.zacao.top 去水印接口今日更新](2026-10-01.md)
