@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-10-15](https://github.com/luzacao/jimeng-doubao-video-parse-20261015) `luzacao/jimeng-doubao-video-parse-20261015`
 - [2026-10-14](https://github.com/luzacao/wechat-channels-qushuiyin-20261014) `luzacao/wechat-channels-qushuiyin-20261014`
 - [2026-10-13](https://github.com/luzacao/short-video-no-watermark-api-20261013) `luzacao/short-video-no-watermark-api-20261013`
 - [2026-10-12](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261012) `luzacao/xiaohongshu-kuaishou-parse-api-20261012`
@@ -51,6 +52,7 @@
 
 ## 文稿备份
 
+- [2026-10-15 · 视频号、公众号链接能解析什么、不能解析什么——一份实测清单](2026-10-15.md)
 - [2026-10-14 · 小红书图文笔记别再踩坑：image_list 避坑清单，抖音快手一并去水印](2026-10-14.md)
 - [2026-10-13 · 豆包、即梦 AI 视频分享链去水印：30 秒看懂，3 步跑通](2026-10-13.md)
 - [2026-10-12 · 快手口令解析失败别急着骂接口，先看这 5 个问答](2026-10-12.md)
