@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-10-17](https://github.com/luzacao/video-parse-api-qushuiyin-20261017) `luzacao/video-parse-api-qushuiyin-20261017`
 - [2026-10-16](https://github.com/luzacao/tiktok-douyin-watermark-api-20261016) `luzacao/tiktok-douyin-watermark-api-20261016`
 - [2026-10-15](https://github.com/luzacao/jimeng-doubao-video-parse-20261015) `luzacao/jimeng-doubao-video-parse-20261015`
 - [2026-10-14](https://github.com/luzacao/wechat-channels-qushuiyin-20261014) `luzacao/wechat-channels-qushuiyin-20261014`
@@ -53,6 +54,7 @@
 
 ## 文稿备份
 
+- [2026-10-17 · 抖音快手去水印 API 更新：parse、parse/v2、detail、video/stream 到底怎么选](2026-10-17.md)
 - [2026-10-16 · 短视频去水印 API 接入实录：一个剪辑师把报错变成了文档](2026-10-16.md)
 - [2026-10-15 · 视频号、公众号链接能解析什么、不能解析什么——一份实测清单](2026-10-15.md)
 - [2026-10-14 · 小红书图文笔记别再踩坑：image_list 避坑清单，抖音快手一并去水印](2026-10-14.md)
