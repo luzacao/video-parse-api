@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-10-20](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261020) `luzacao/xiaohongshu-kuaishou-parse-api-20261020`
 - [2026-10-19](https://github.com/luzacao/doubao-watermark-free-parse-20261019) `luzacao/doubao-watermark-free-parse-20261019`
 - [2026-10-18](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20261018) `luzacao/douyin-kuaishou-qushuiyin-api-20261018`
 - [2026-10-17](https://github.com/luzacao/video-parse-api-qushuiyin-20261017) `luzacao/video-parse-api-qushuiyin-20261017`
@@ -56,6 +57,7 @@
 
 ## 文稿备份
 
+- [2026-10-20 · 抖音快手去水印 API 直链过期、防盗链、代理播放怎么处理？客服问答版](2026-10-20.md)
 - [2026-10-19 · 短视频去水印 API：网页复制保存 vs 接口批量，差的不只是手速](2026-10-19.md)
 - [2026-10-18 · 短视频去水印 API：运营同学 3 分钟上手（抖音 / 快手都能跑）](2026-10-18.md)
 - [2026-10-17 · 抖音快手去水印 API 更新：parse、parse/v2、detail、video/stream 到底怎么选](2026-10-17.md)
