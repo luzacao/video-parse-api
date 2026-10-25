@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-10-26](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20261026) `luzacao/douyin-kuaishou-qushuiyin-api-20261026`
 - [2026-10-25](https://github.com/luzacao/video-parse-api-qushuiyin-20261025) `luzacao/video-parse-api-qushuiyin-20261025`
 - [2026-10-24](https://github.com/luzacao/tiktok-douyin-watermark-api-20261024) `luzacao/tiktok-douyin-watermark-api-20261024`
 - [2026-10-23](https://github.com/luzacao/jimeng-doubao-video-parse-20261023) `luzacao/jimeng-doubao-video-parse-20261023`
@@ -62,6 +63,7 @@
 
 ## 文稿备份
 
+- [2026-10-26 · 短视频去水印 API：从一行 Python 到抖音快手无水印直链](2026-10-26.md)
 - [2026-10-25 · 视频号、公众号解析边界说明：抖音快手去水印 API 今日更新](2026-10-25.md)
 - [2026-10-24 · 小红书图文去水印怎么批量拿图？聊聊 image_list 和实况图里的 live_photo_url](2026-10-24.md)
 - [2026-10-23 · 抖音快手豆包去水印怎么选？自己下、群里找工具、用 video.zacao.top 接口三路对比](2026-10-23.md)
