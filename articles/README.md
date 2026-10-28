@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-10-29](https://github.com/luzacao/short-video-no-watermark-api-20261029) `luzacao/short-video-no-watermark-api-20261029`
 - [2026-10-28](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261028) `luzacao/xiaohongshu-kuaishou-parse-api-20261028`
 - [2026-10-27](https://github.com/luzacao/doubao-watermark-free-parse-20261027) `luzacao/doubao-watermark-free-parse-20261027`
 - [2026-10-26](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20261026) `luzacao/douyin-kuaishou-qushuiyin-api-20261026`
@@ -65,6 +66,7 @@
 
 ## 文稿备份
 
+- [2026-10-29 · 短视频去水印 API：别再网页复制保存了，接口批量才省事](2026-10-29.md)
 - [2026-10-28 · 2026-10-28](2026-10-28.md)
 - [2026-10-27 · 短视频去水印 API 四个端点怎么选：parse、v2、detail、stream 一张表看懂](2026-10-27.md)
 - [2026-10-26 · 短视频去水印 API：从一行 Python 到抖音快手无水印直链](2026-10-26.md)
