@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-10-30](https://github.com/luzacao/wechat-channels-qushuiyin-20261030) `luzacao/wechat-channels-qushuiyin-20261030`
 - [2026-10-29](https://github.com/luzacao/short-video-no-watermark-api-20261029) `luzacao/short-video-no-watermark-api-20261029`
 - [2026-10-28](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261028) `luzacao/xiaohongshu-kuaishou-parse-api-20261028`
 - [2026-10-27](https://github.com/luzacao/doubao-watermark-free-parse-20261027) `luzacao/doubao-watermark-free-parse-20261027`
@@ -66,6 +67,7 @@
 
 ## 文稿备份
 
+- [2026-10-30 · 别再踩直链过期和防盗链的坑：短视频去水印 API 避坑清单](2026-10-30.md)
 - [2026-10-29 · 短视频去水印 API：别再网页复制保存了，接口批量才省事](2026-10-29.md)
 - [2026-10-28 · 2026-10-28](2026-10-28.md)
 - [2026-10-27 · 短视频去水印 API 四个端点怎么选：parse、v2、detail、stream 一张表看懂](2026-10-27.md)
