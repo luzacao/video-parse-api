@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-11-03](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20261103) `luzacao/douyin-kuaishou-qushuiyin-api-20261103`
 - [2026-11-02](https://github.com/luzacao/video-parse-api-qushuiyin-20261102) `luzacao/video-parse-api-qushuiyin-20261102`
 - [2026-11-01](https://github.com/luzacao/tiktok-douyin-watermark-api-20261101) `luzacao/tiktok-douyin-watermark-api-20261101`
 - [2026-10-31](https://github.com/luzacao/jimeng-doubao-video-parse-20261031) `luzacao/jimeng-doubao-video-parse-20261031`
@@ -70,6 +71,7 @@
 
 ## 文稿备份
 
+- [2026-11-03 · 小红书图文怎么去水印？用 image_list 一次拿全实况图](2026-11-03.md)
 - [2026-11-02 · 豆包、即梦 AI 视频分享链也能去水印了｜短视频去水印 API 更新说明](2026-11-02.md)
 - [2026-11-01 · 快手短链解析总失败？一个剪辑师踩坑半天的排查手记](2026-11-01.md)
 - [2026-10-31 · 抖音分享链接怎么一键拿到无水印视频？我把三种做法摆在一张表里对比](2026-10-31.md)
