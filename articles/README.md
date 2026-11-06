@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-11-07](https://github.com/luzacao/wechat-channels-qushuiyin-20261107) `luzacao/wechat-channels-qushuiyin-20261107`
 - [2026-11-06](https://github.com/luzacao/short-video-no-watermark-api-20261106) `luzacao/short-video-no-watermark-api-20261106`
 - [2026-11-05](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261105) `luzacao/xiaohongshu-kuaishou-parse-api-20261105`
 - [2026-11-04](https://github.com/luzacao/doubao-watermark-free-parse-20261104) `luzacao/doubao-watermark-free-parse-20261104`
@@ -74,6 +75,7 @@
 
 ## 文稿备份
 
+- [2026-11-07 · 别再踩这 8 个坑：运营同学 3 分钟上手短视频去水印 API](2026-11-07.md)
 - [2026-11-06 · 短视频去水印 API 怎么选接口？parse、v2、detail、stream 一次讲清](2026-11-06.md)
 - [2026-11-05 · 短视频去水印 API 怎么买 Key、怎么读懂限流和错误码？客服式问答](2026-11-05.md)
 - [2026-11-04 · 视频号、公众号链接能不能去水印？一张表说清楚｜video.zacao.top 实测](2026-11-04.md)
