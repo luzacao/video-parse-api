@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-11-10](https://github.com/luzacao/video-parse-api-qushuiyin-20261110) `luzacao/video-parse-api-qushuiyin-20261110`
 - [2026-11-09](https://github.com/luzacao/tiktok-douyin-watermark-api-20261109) `luzacao/tiktok-douyin-watermark-api-20261109`
 - [2026-11-08](https://github.com/luzacao/jimeng-doubao-video-parse-20261108) `luzacao/jimeng-doubao-video-parse-20261108`
 - [2026-11-07](https://github.com/luzacao/wechat-channels-qushuiyin-20261107) `luzacao/wechat-channels-qushuiyin-20261107`
@@ -77,6 +78,7 @@
 
 ## 文稿备份
 
+- [2026-11-10 · 抖音分享链接怎么一键拿到无水印视频？试试 https://video.zacao.top](2026-11-10.md)
 - [2026-11-09 · 剪辑师阿凯的周三：三个视频，两个播不了](2026-11-09.md)
 - [2026-11-08 · 抖音快手去水印：网页复制保存 vs 接口批量，一张表说清楚](2026-11-08.md)
 - [2026-11-07 · 别再踩这 8 个坑：运营同学 3 分钟上手短视频去水印 API](2026-11-07.md)
