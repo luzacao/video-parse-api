@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-11-13](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261113) `luzacao/xiaohongshu-kuaishou-parse-api-20261113`
 - [2026-11-12](https://github.com/luzacao/doubao-watermark-free-parse-20261112) `luzacao/doubao-watermark-free-parse-20261112`
 - [2026-11-11](https://github.com/luzacao/douyin-kuaishou-qushuiyin-api-20261111) `luzacao/douyin-kuaishou-qushuiyin-api-20261111`
 - [2026-11-10](https://github.com/luzacao/video-parse-api-qushuiyin-20261110) `luzacao/video-parse-api-qushuiyin-20261110`
@@ -80,6 +81,7 @@
 
 ## 文稿备份
 
+- [2026-11-13 · 小红书图文与实况图怎么拿？用 video.zacao.top 去水印接口聊清 image_list](2026-11-13.md)
 - [2026-11-12 · 豆包、即梦 AI 视频分享链怎么去水印？一张表看懂 video.zacao.top](2026-11-12.md)
 - [2026-11-11 · 体验地址：https://video.zacao.top （打开网页即可使用，无需访问密码）](2026-11-11.md)
 - [2026-11-10 · 抖音分享链接怎么一键拿到无水印视频？试试 https://video.zacao.top](2026-11-10.md)
