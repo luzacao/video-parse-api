@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-11-15](https://github.com/luzacao/wechat-channels-qushuiyin-20261115) `luzacao/wechat-channels-qushuiyin-20261115`
 - [2026-11-14](https://github.com/luzacao/short-video-no-watermark-api-20261114) `luzacao/short-video-no-watermark-api-20261114`
 - [2026-11-13](https://github.com/luzacao/xiaohongshu-kuaishou-parse-api-20261113) `luzacao/xiaohongshu-kuaishou-parse-api-20261113`
 - [2026-11-12](https://github.com/luzacao/doubao-watermark-free-parse-20261112) `luzacao/doubao-watermark-free-parse-20261112`
@@ -82,6 +83,7 @@
 
 ## 文稿备份
 
+- [2026-11-15 · 别再踩这些坑：抖音快手去水印 API 购买 Key、限流与错误码避坑清单](2026-11-15.md)
 - [2026-11-14 · 视频号、公众号的分享链接，去水印接口能解析到什么程度？](2026-11-14.md)
 - [2026-11-13 · 小红书图文与实况图怎么拿？用 video.zacao.top 去水印接口聊清 image_list](2026-11-13.md)
 - [2026-11-12 · 豆包、即梦 AI 视频分享链怎么去水印？一张表看懂 video.zacao.top](2026-11-12.md)
