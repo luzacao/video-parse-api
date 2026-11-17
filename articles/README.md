@@ -4,6 +4,7 @@
 
 ## 每日仓库
 
+- [2026-11-18](https://github.com/luzacao/video-parse-api-qushuiyin-20261118) `luzacao/video-parse-api-qushuiyin-20261118`
 - [2026-11-17](https://github.com/luzacao/tiktok-douyin-watermark-api-20261117) `luzacao/tiktok-douyin-watermark-api-20261117`
 - [2026-11-16](https://github.com/luzacao/jimeng-doubao-video-parse-20261116) `luzacao/jimeng-doubao-video-parse-20261116`
 - [2026-11-15](https://github.com/luzacao/wechat-channels-qushuiyin-20261115) `luzacao/wechat-channels-qushuiyin-20261115`
@@ -85,6 +86,7 @@
 
 ## 文稿备份
 
+- [2026-11-18 · 短视频去水印 API 更新：网页复制保存 vs 接口批量，今天聊聊效率差在哪](2026-11-18.md)
 - [2026-11-17 · 运营也能 3 分钟上手：给抖音、快手去水印的懒人接口](2026-11-17.md)
 - [2026-11-16 · 抖音快手去水印怎么选接口？parse、v2、detail、stream 四条路对比](2026-11-16.md)
 - [2026-11-15 · 别再踩这些坑：抖音快手去水印 API 购买 Key、限流与错误码避坑清单](2026-11-15.md)
